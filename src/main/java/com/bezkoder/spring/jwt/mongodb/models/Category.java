@@ -23,7 +23,7 @@ public class Category {
         return category_id;
     }
 
-    public void setId(Integer category_id) {
+    public void setCategory_id(Integer category_id) {
         this.category_id = category_id;
     }
 

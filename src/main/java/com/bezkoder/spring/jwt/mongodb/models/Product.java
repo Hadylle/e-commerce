@@ -1,6 +1,7 @@
 package com.bezkoder.spring.jwt.mongodb.models;
 
 import com.bezkoder.spring.jwt.mongodb.CategoryDeserializer;
+import com.bezkoder.spring.jwt.mongodb.annotations.Searchable;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -10,10 +11,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Product {
 
     @Id
-    private Integer product_id;  // Changed to String for MongoDB
+    private String product_id;  // Changed to String for MongoDB
 
+    @Searchable
     private String name;
+
+    @Searchable
     private String description;
+    @Searchable
     private Double price;
     private String imageURL;
     private int quantity;
@@ -25,7 +30,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(Integer product_id, String name, String description, Double price, String imageURL, int quantity, Category category) {
+    public Product(String product_id, String name, String description, Double price, String imageURL, int quantity, Category category) {
         this.product_id = product_id;
         this.name = name;
         this.description = description;
@@ -48,11 +53,11 @@ public class Product {
                 '}';
     }
 
-    public Integer getProduct_id() {
+    public String getProduct_id() {
         return product_id;
     }
 
-    public void setProduct_id(Integer product_id) {
+    public void setProduct_id(String product_id) {
         this.product_id = product_id;
     }
 

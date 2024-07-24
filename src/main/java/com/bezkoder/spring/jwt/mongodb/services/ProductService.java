@@ -1,63 +1,26 @@
 package com.bezkoder.spring.jwt.mongodb.services;
 
-import com.bezkoder.spring.jwt.mongodb.models.Category;
 import com.bezkoder.spring.jwt.mongodb.models.Product;
-import com.bezkoder.spring.jwt.mongodb.repository.ProductRepository;
-import com.bezkoder.spring.jwt.mongodb.repository.categoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class ProductService {
+public interface ProductService {
+    Product saveProduct(Product product);
+    List<Product> getAllProducts();
+    Optional<Product> getProductById(Integer product_id);
+    List<Product> getProductsByCategory(Integer name);
+    Product updateProduct(Integer product_id, Product updatedProduct);
+    void deleteProduct(Integer product_id);
 
-    private final ProductRepository productRepo;
-    private final categoryRepository categoryRepo;
-
-    @Autowired
-    public ProductService(ProductRepository productRepo, categoryRepository categoryRepo) {
-        this.productRepo = productRepo;
-        this.categoryRepo = categoryRepo;
-    }
-
-    public Product saveProduct(Product product) {
-        return productRepo.save(product);
-    }
-
-    public List<Product> getAllProducts(){
-        return productRepo.findAll();
-    }
-
-    public Optional<Product> getProductById(Integer product_id){
-        return productRepo.findById(product_id);
-    }
-    public List<Product> getProductsByCategory(Integer name) {
-        Category category = categoryRepo.findById(name).orElse(null);
-        if (category != null) {
-            return productRepo.findByCategory(category);
-        } else {
-            return null;
-        }
-    }
-
-    public Product updateProduct(Integer product_id, Product updatedProduct){
-        Optional<Product> existingProduct = productRepo.findById(product_id);
-        if(existingProduct.isPresent()) {
-            Product product = existingProduct.get();
-            product.setName(updatedProduct.getName());
-            product.setDescription(updatedProduct.getDescription());
-            product.setPrice(updatedProduct.getPrice());
-            product.setQuantity(updatedProduct.getQuantity());
-            product.setImageURL(updatedProduct.getImageURL());
-            return productRepo.save(product);
-        }
-        else {
-            throw  new RuntimeException("Product Not Found");
-        }
-    }
-    public void deleteProduct (Integer product_id) {
-        productRepo.deleteById(product_id);
-    }
+    // Filtering methods
+    List<Product> findByNameContaining(String name);
+    List<Product> findByNameStartingWith(String name);
+    List<Product> findByNameEndingWith(String name);
+    List<Product> findByDescriptionContaining(String description);
+    List<Product> findByPriceGreaterThan(Double price);
+    List<Product> findByPriceLessThan(Double price);
+    List<Product> findByPriceBetween(Double from, Double to);
+    List<Product> findByQuantityGreaterThan(int quantity);
+    List<Product> findByCategory(String category);
 }

@@ -41,7 +41,7 @@ public class CategoryController {
         return category.map(ResponseEntity ::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/category/{category_id}")
+ @PutMapping("/category/{category_id}")
     public ResponseEntity<Category> updateCategory(@PathVariable Integer category_id, @RequestBody Category category){
         Category updateCategory = categoryService.updateCategory(category_id,category);
         return ResponseEntity.ok(updateCategory);
