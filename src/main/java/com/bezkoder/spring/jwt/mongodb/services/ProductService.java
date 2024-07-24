@@ -5,8 +5,12 @@ import com.bezkoder.spring.jwt.mongodb.models.Product;
 import com.bezkoder.spring.jwt.mongodb.repository.ProductRepository;
 import com.bezkoder.spring.jwt.mongodb.repository.categoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
+
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +21,7 @@ public class ProductService {
     private final categoryRepository categoryRepo;
 
     @Autowired
-    public ProductService(ProductRepository productRepo, categoryRepository categoryRepo) {
+    public ProductService(ProductRepository productRepo, categoryRepository categoryRepo, MongoTemplate mongoTemplate) {
         this.productRepo = productRepo;
         this.categoryRepo = categoryRepo;
     }
@@ -33,8 +37,9 @@ public class ProductService {
     public Optional<Product> getProductById(Integer product_id){
         return productRepo.findById(product_id);
     }
-    public List<Product> getProductsByCategory(Integer name) {
-        Category category = categoryRepo.findById(name).orElse(null);
+
+    public List<Product> getProductsByCategory(String name) {
+        Category category = categoryRepo.findByName(name).orElse(null);
         if (category != null) {
             return productRepo.findByCategory(category);
         } else {
@@ -60,4 +65,7 @@ public class ProductService {
     public void deleteProduct (Integer product_id) {
         productRepo.deleteById(product_id);
     }
+
+
+
 }

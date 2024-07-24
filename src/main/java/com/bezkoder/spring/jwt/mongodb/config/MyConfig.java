@@ -11,7 +11,7 @@ public class MyConfig {
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
-            public void addCorsMappings(final CorsRegistry registry) {
+            public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedMethods("*").allowedHeaders("*");
             }
         };

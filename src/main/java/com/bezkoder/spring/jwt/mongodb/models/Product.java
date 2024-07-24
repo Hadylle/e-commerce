@@ -25,6 +25,8 @@ public class Product {
     public Product() {
     }
 
+
+
     public Product(Integer product_id, String name, String description, Double price, String imageURL, int quantity, Category category) {
         this.product_id = product_id;
         this.name = name;
@@ -33,6 +35,7 @@ public class Product {
         this.imageURL = imageURL;
         this.quantity = quantity;
         this.category = category;
+
     }
 
     @Override
@@ -41,10 +44,11 @@ public class Product {
                 "product_id='" + product_id + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", price=" + price +
+                ", price=" + price +'\'' +
                 ", imageURL='" + imageURL + '\'' +
                 ", quantity=" + quantity +
                 ", category=" + category +
+
                 '}';
     }
 
@@ -103,4 +107,6 @@ public class Product {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+
 }

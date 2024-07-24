@@ -31,6 +31,11 @@ public class CategoryService {
     public Optional<Category> getCategoryById(Integer category_id){
         return categoryRepo.findById(category_id);
     }
+    public Optional<Category> getCategoryByName(String name) {
+        return categoryRepo.findByName(name);
+
+    }
+
 
 
 
@@ -48,4 +53,6 @@ public class CategoryService {
     public void deleteCategory (Integer category_id) {
         categoryRepo.deleteById(category_id);
     }
+
+
 }

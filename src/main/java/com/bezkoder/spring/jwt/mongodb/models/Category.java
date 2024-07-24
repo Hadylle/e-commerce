@@ -23,7 +23,7 @@ public class Category {
         return category_id;
     }
 
-    public void setId(Integer category_id) {
+    public void setCategory_id(Integer category_id) {
         this.category_id = category_id;
     }
 
@@ -38,7 +38,7 @@ public class Category {
     @Override
     public String toString() {
         return "Category{" +
-                "id='" + category_id + '\'' +
+                "category_id=" + category_id +
                 ", name='" + name + '\'' +
                 '}';
     }
