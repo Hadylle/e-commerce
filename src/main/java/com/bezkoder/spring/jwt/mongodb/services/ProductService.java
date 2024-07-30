@@ -1,6 +1,7 @@
 package com.bezkoder.spring.jwt.mongodb.services;
 
 import com.bezkoder.spring.jwt.mongodb.models.Product;
+import com.bezkoder.spring.jwt.mongodb.repository.ProductRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,4 +24,7 @@ public interface ProductService {
     List<Product> findByPriceBetween(Double from, Double to);
     List<Product> findByQuantityGreaterThan(int quantity);
     List<Product> findByCategory(String category);
+
+    List<Product> filterProducts(String name, String description, Double minPrice, Double maxPrice, Integer categoryId);
+
 }

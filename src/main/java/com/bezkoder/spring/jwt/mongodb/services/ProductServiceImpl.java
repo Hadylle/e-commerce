@@ -115,4 +115,9 @@ public class ProductServiceImpl implements  ProductService{
     public List<Product> findByCategory(String category) {
         return productRepo.findByCategoryName(category);
     }
+
+    @Override
+    public List<Product> filterProducts(String name, String description, Double minPrice, Double maxPrice, Integer categoryId) {
+        return productRepo.findProducts(name, description, minPrice, maxPrice, categoryId);
+    }
 }

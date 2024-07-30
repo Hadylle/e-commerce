@@ -4,6 +4,7 @@ import com.bezkoder.spring.jwt.mongodb.models.Product;
 import com.bezkoder.spring.jwt.mongodb.services.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -150,5 +151,16 @@ public class ProductController {
     @GetMapping("/products/search/category")
     public List<Product> findByCategory(@RequestParam String category) {
         return productService.findByCategory(category);
+    }
+    @GetMapping("/filter")
+    public ResponseEntity<List<Product>> filterProducts(
+            @RequestParam(required = false, defaultValue = "") String name,
+            @RequestParam(required = false, defaultValue = "") String description,
+            @RequestParam(required = false, defaultValue = "0") Double minPrice,
+            @RequestParam(required = false, defaultValue = "Double.MAX_VALUE") Double maxPrice,
+            @RequestParam(required = false, defaultValue = "0") Integer categoryId) {
+
+        List<Product> products = productService.filterProducts(name, description, minPrice, maxPrice, categoryId);
+        return products.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(products, HttpStatus.OK);
     }
 }
