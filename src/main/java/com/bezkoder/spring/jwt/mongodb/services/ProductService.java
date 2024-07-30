@@ -67,5 +67,41 @@ public class ProductService {
     }
 
 
+    public List<Product> findByNameContaining(String name) {
+        return productRepo.findByNameContaining(name);
+    }
 
+    public List<Product> findByNameStartingWith(String name) {
+        return productRepo.findByNameStartingWith(name);
+    }
+
+    public List<Product> findByNameEndingWith(String name) {
+        return productRepo.findByNameEndingWith(name);
+    }
+
+    public List<Product> findByDescriptionContaining(String description) {
+        return productRepo.findByDescriptionContaining(description);
+    }
+
+    public List<Product> findByPriceGreaterThan(Double price) {
+        return productRepo.findByPriceGreaterThan(price);
+    }
+
+    public List<Product> findByPriceLessThan(Double price) {
+        return productRepo.findByPriceLessThan(price);
+    }
+
+    public List<Product> findByPriceBetween(Double from, Double to) {
+        return productRepo.findByPriceBetween(from, to);
+    }
+
+    public List<Product> findByQuantityGreaterThan(int quantity) {
+        return productRepo.findByQuantityGreaterThan(quantity);
+    }
+
+
+    public List<Product> findByCategory(String category) {
+        return productRepo.findByCategoryName(category);
+    }
 }
+
